@@ -22,6 +22,7 @@ import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -29,7 +30,8 @@ import org.springframework.stereotype.Component;
  *
  * @author Andrey Pugachenko <andrqxa@gmail.com>
  */
-@Component
+@Component("person")
+@Scope("prototype")
 public class Person implements Serializable, Comparable<Person> {
 
     private final UUID id;
@@ -123,6 +125,11 @@ public class Person implements Serializable, Comparable<Person> {
         } else {
             return surname.compareTo(person.getSurname());
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("id:%s\nsurname:%s\nname:%s\npatronic:%s", id, surname, name, patronic);
     }
 
 }

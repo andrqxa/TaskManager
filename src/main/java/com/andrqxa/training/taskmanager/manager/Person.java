@@ -17,29 +17,27 @@ package com.andrqxa.training.taskmanager.manager;
 
 import java.io.Serializable;
 import java.util.Optional;
+import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 
 /**
+ * The class stores personal information about person who created task
  *
  * @author Andrey Pugachenko <andrqxa@gmail.com>
  */
 public class Person implements Serializable {
 
-    private int id;
+    private final UUID id;
     private String name;
     private String surname;
     private String patronic;
 
-    public Person(int id) {
-        this.id = id;
+    public Person() {
+        this.id = UUID.randomUUID();
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

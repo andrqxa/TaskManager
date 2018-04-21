@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * The class which stores an element of task queue
@@ -33,7 +34,11 @@ public class TaskQueueElement implements Comparable<TaskQueueElement> {
     private final LocalDateTime timeStart;
     private LocalDateTime timeFinish;
     private Status status;
+
+    @Autowired
     private Person person;
+
+    @Autowired
     private Task task;
 
     public TaskQueueElement() {

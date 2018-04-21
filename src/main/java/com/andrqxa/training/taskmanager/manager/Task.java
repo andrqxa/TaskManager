@@ -20,12 +20,14 @@ import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.springframework.stereotype.Component;
 
 /**
  * The class which stores task
  *
  * @author Andrey Pugachenko <andrqxa@gmail.com>
  */
+@Component
 public class Task implements Comparable<Task> {
 
     private final UUID id;

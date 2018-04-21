@@ -20,6 +20,7 @@ import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -27,7 +28,8 @@ import org.springframework.stereotype.Component;
  *
  * @author Andrey Pugachenko <andrqxa@gmail.com>
  */
-@Component
+@Component("task")
+@Scope("prototype")
 public class Task implements Comparable<Task> {
 
     private final UUID id;
@@ -58,7 +60,7 @@ public class Task implements Comparable<Task> {
     }
 
     public void setDescription(String description) {
-        Optional<String> result = Optional.ofNullable(name);
+        Optional<String> result = Optional.ofNullable(description);
         this.description = result.orElse(StringUtils.EMPTY);
     }
 
@@ -94,6 +96,17 @@ public class Task implements Comparable<Task> {
     @Override
     public int compareTo(Task task) {
         return name.compareTo(task.getName());
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder
+                .append("----------------------------------------------------------------------------\n")
+                .append(String.format("id:%s\nname:%s\ndescription:%s\n", id, name, description))
+                .append("----------------------------------------------------------------------------\n");
+
+        return builder.toString();
     }
 
 }

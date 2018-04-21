@@ -18,16 +18,22 @@ package com.andrqxa.training.taskmanager.manager;
 import com.andrqxa.training.taskmanager.enums.Status;
 import static com.andrqxa.training.taskmanager.enums.Status.*;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  * The class which stores an element of task queue
  *
  * @author Andrey Pugachenko <andrqxa@gmail.com>
  */
+@Component("taskQueueElement")
+@Scope("prototype")
 public class TaskQueueElement implements Comparable<TaskQueueElement> {
 
     private final UUID id;
@@ -125,6 +131,25 @@ public class TaskQueueElement implements Comparable<TaskQueueElement> {
     @Override
     public int compareTo(TaskQueueElement taskQueue) {
         return timeStart.compareTo(taskQueue.getTimeStart());
+    }
+
+    @Override
+    public String toString() {
+        Optional<LocalDateTime> finish = Optional.ofNullable(timeFinish);
+        String finishTime = finish.isPresent() ? finish.toString() : StringUtils.EMPTY;
+        StringBuilder builder = new StringBuilder();
+        builder
+                .append("============================================================================\n")
+                .append(String.format("id:%s\nstart:%s\nfinish:%s\nstatus:%s\n%s\n%s\n",
+                        id,
+                        timeStart.toString(),
+                        finishTime,
+                        status.toString(),
+                        person.toString(),
+                        task.toString()))
+                .append("============================================================================\n");
+
+        return builder.toString();
     }
 
 }

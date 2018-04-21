@@ -129,7 +129,13 @@ public class Person implements Serializable, Comparable<Person> {
 
     @Override
     public String toString() {
-        return String.format("id:%s\nsurname:%s\nname:%s\npatronic:%s", id, surname, name, patronic);
+        StringBuilder builder = new StringBuilder();
+        builder
+                .append("----------------------------------------------------------------------------\n")
+                .append(String.format("id:%s\nsurname:%s\nname:%s\npatronic:%s\n", id, surname, name, patronic))
+                .append("----------------------------------------------------------------------------\n");
+
+        return builder.toString();
     }
 
 }

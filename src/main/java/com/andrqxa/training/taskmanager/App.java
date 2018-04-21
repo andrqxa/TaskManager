@@ -16,6 +16,8 @@
 package com.andrqxa.training.taskmanager;
 
 import com.andrqxa.training.taskmanager.manager.Person;
+import com.andrqxa.training.taskmanager.manager.Task;
+import com.andrqxa.training.taskmanager.manager.TaskQueueElement;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -28,10 +30,19 @@ public class App {
     public static void main(String[] args) {
         try (ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml")) {
             Person person = (Person) ctx.getBean("person");
-            person.setName("AAAA");
-            person.setPatronic("BBBBB");
-            person.setSurname("CCCCC");
-            System.out.println(person.toString());
+            person.setName("Andrey");
+            person.setPatronic("S.");
+            person.setSurname("Pugachenko");
+
+            Task task = (Task) ctx.getBean("task");
+            task.setName("Finished housework");
+            task.setDescription("I have to finish my housework till 7p.m.");
+
+            TaskQueueElement taskQueueElement = (TaskQueueElement) ctx.getBean("taskQueueElement");
+            taskQueueElement.setPerson(person);
+            taskQueueElement.setTask(task);
+
+            System.out.println(taskQueueElement.toString());
         }
     }
 

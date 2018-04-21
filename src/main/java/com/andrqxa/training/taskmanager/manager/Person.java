@@ -115,7 +115,7 @@ public class Person implements Serializable, Comparable<Person> {
                 }
 
             } else {
-                return surname.compareTo(person.getSurname());
+                return name.compareTo(person.getName());
             }
 
         } else {

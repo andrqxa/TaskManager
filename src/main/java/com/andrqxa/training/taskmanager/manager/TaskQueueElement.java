@@ -23,11 +23,11 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
- * The class which stores on element of task queue
+ * The class which stores an element of task queue
  *
  * @author Andrey Pugachenko <andrqxa@gmail.com>
  */
-public class TaskQueue {
+public class TaskQueueElement implements Comparable<TaskQueueElement> {
 
     private final UUID id;
     private final LocalDateTime timeStart;
@@ -36,7 +36,7 @@ public class TaskQueue {
     private Person person;
     private Task task;
 
-    public TaskQueue() {
+    public TaskQueueElement() {
         this.id = UUID.randomUUID();
         this.timeStart = LocalDateTime.now();
         this.status = INIT;
@@ -100,11 +100,11 @@ public class TaskQueue {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof TaskQueue)) {
+        if (!(obj instanceof TaskQueueElement)) {
             return false;
         }
 
-        TaskQueue other = (TaskQueue) obj;
+        TaskQueueElement other = (TaskQueueElement) obj;
 
         EqualsBuilder builder = new EqualsBuilder();
         builder.append(this.id, other.getId())
@@ -115,6 +115,11 @@ public class TaskQueue {
                 .append(this.task, other.getTask());
 
         return builder.isEquals();
+    }
+
+    @Override
+    public int compareTo(TaskQueueElement taskQueue) {
+        return timeStart.compareTo(taskQueue.getTimeStart());
     }
 
 }

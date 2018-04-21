@@ -26,7 +26,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  *
  * @author Andrey Pugachenko <andrqxa@gmail.com>
  */
-public class Task {
+public class Task implements Comparable<Task> {
 
     private final UUID id;
     private String name;
@@ -87,6 +87,11 @@ public class Task {
                 .append(this.description, other.getDescription());
 
         return builder.isEquals();
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        return name.compareTo(task.getName());
     }
 
 }

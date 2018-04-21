@@ -34,6 +34,10 @@ public class Task {
         this.id = UUID.randomUUID();
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     public String getName() {
         Optional<String> result = Optional.ofNullable(name);
         return result.orElse(StringUtils.EMPTY);

@@ -43,7 +43,8 @@ public class Person implements Serializable {
     }
 
     public String getName() {
-        return name;
+        Optional<String> result = Optional.ofNullable(name);
+        return result.orElse(StringUtils.EMPTY);
     }
 
     public void setName(String name) {
@@ -52,19 +53,23 @@ public class Person implements Serializable {
     }
 
     public String getSurname() {
-        return surname;
+        Optional<String> result = Optional.ofNullable(surname);
+        return result.orElse(StringUtils.EMPTY);
     }
 
     public void setSurname(String surname) {
-        this.surname = surname;
+        Optional<String> result = Optional.ofNullable(surname);
+        this.surname = result.orElse(StringUtils.EMPTY);
     }
 
     public String getPatronic() {
-        return patronic;
+        Optional<String> result = Optional.ofNullable(patronic);
+        return result.orElse(StringUtils.EMPTY);
     }
 
     public void setPatronic(String patronic) {
-        this.patronic = patronic;
+        Optional<String> result = Optional.ofNullable(patronic);
+        this.patronic = result.orElse(StringUtils.EMPTY);
     }
 
 }

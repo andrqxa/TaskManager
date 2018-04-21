@@ -15,6 +15,7 @@
  */
 package com.andrqxa.training.taskmanager.manager;
 
+import static com.andrqxa.training.taskmanager.enums.Compares.*;
 import java.io.Serializable;
 import java.util.Optional;
 import java.util.UUID;
@@ -27,7 +28,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  *
  * @author Andrey Pugachenko <andrqxa@gmail.com>
  */
-public class Person implements Serializable {
+public class Person implements Serializable, Comparable<Person> {
 
     private final UUID id;
     private String name;
@@ -101,6 +102,25 @@ public class Person implements Serializable {
                 .append(this.patronic, other.getPatronic());
 
         return builder.isEquals();
+    }
+
+    @Override
+    public int compareTo(Person person) {
+        if (surname.equalsIgnoreCase(person.getSurname())) {
+            if (name.equalsIgnoreCase(person.getName())) {
+                if (patronic.equalsIgnoreCase(person.getPatronic())) {
+                    return EQUAL.getCompare();
+                } else {
+                    return patronic.compareTo(person.getPatronic());
+                }
+
+            } else {
+                return surname.compareTo(person.getSurname());
+            }
+
+        } else {
+            return surname.compareTo(person.getSurname());
+        }
     }
 
 }

@@ -30,7 +30,7 @@ public enum Compares {
         this.compare = cmp;
     }
 
-    public int getCOmpare() {
+    public int getCompare() {
         return compare;
     }
 }

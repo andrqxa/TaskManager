@@ -19,6 +19,8 @@ import com.andrqxa.training.taskmanager.enums.Status;
 import static com.andrqxa.training.taskmanager.enums.Status.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * The class which stores on element of task queue
@@ -78,6 +80,41 @@ public class TaskQueue {
 
     public void setTask(Task task) {
         this.task = task;
+    }
+
+    @Override
+    public int hashCode() {
+        HashCodeBuilder builder = new HashCodeBuilder();
+        builder.append(this.id)
+                .append(this.timeStart)
+                .append(this.timeFinish)
+                .append(this.status)
+                .append(this.person)
+                .append(this.task);
+
+        return builder.toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof TaskQueue)) {
+            return false;
+        }
+
+        TaskQueue other = (TaskQueue) obj;
+
+        EqualsBuilder builder = new EqualsBuilder();
+        builder.append(this.id, other.getId())
+                .append(this.timeStart, other.getTimeStart())
+                .append(this.timeFinish, other.getTimeFinish())
+                .append(this.status, other.getStatus())
+                .append(this.person, other.getPerson())
+                .append(this.task, other.getTask());
+
+        return builder.isEquals();
     }
 
 }

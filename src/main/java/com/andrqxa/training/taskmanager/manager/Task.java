@@ -18,6 +18,8 @@ package com.andrqxa.training.taskmanager.manager;
 import java.util.Optional;
 import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * The class which stores task
@@ -56,6 +58,35 @@ public class Task {
     public void setDescription(String description) {
         Optional<String> result = Optional.ofNullable(name);
         this.description = result.orElse(StringUtils.EMPTY);
+    }
+
+    @Override
+    public int hashCode() {
+        HashCodeBuilder builder = new HashCodeBuilder();
+        builder.append(this.id)
+                .append(this.name)
+                .append(this.description);
+
+        return builder.toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Task)) {
+            return false;
+        }
+
+        Task other = (Task) obj;
+
+        EqualsBuilder builder = new EqualsBuilder();
+        builder.append(this.id, other.getId())
+                .append(this.name, other.getName())
+                .append(this.description, other.getDescription());
+
+        return builder.isEquals();
     }
 
 }

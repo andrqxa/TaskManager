@@ -19,6 +19,8 @@ import java.io.Serializable;
 import java.util.Optional;
 import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * The class stores personal information about person who created task
@@ -68,6 +70,37 @@ public class Person implements Serializable {
     public void setPatronic(String patronic) {
         Optional<String> result = Optional.ofNullable(patronic);
         this.patronic = result.orElse(StringUtils.EMPTY);
+    }
+
+    @Override
+    public int hashCode() {
+        HashCodeBuilder builder = new HashCodeBuilder();
+        builder.append(this.id)
+                .append(this.name)
+                .append(this.surname)
+                .append(this.patronic);
+
+        return builder.toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Person)) {
+            return false;
+        }
+
+        Person other = (Person) obj;
+
+        EqualsBuilder builder = new EqualsBuilder();
+        builder.append(this.id, other.getId())
+                .append(this.name, other.getName())
+                .append(this.surname, other.getSurname())
+                .append(this.patronic, other.getPatronic());
+
+        return builder.isEquals();
     }
 
 }
